@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomain\AppDomainContextTest.cs" />
     <Compile Include="Common\Thread\Lock\ReaderWriterLockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomain\AppDomainContext.cs" />
+    <Compile Include="AppDomain\AssemblyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Thread\Lock\ReaderWriterLock.cs" />
     <Compile Include="Thread\Lock\ReaderWriterLockMode.cs" />
