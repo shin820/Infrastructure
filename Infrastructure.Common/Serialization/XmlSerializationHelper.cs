@@ -1,13 +1,12 @@
-﻿using System;
+﻿//// 此处代码来源于博客【在.net中读写config文件的各种方法】的示例代码
+//// http://www.cnblogs.com/fish-li/archive/2011/12/18/2292037.html
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-//// 此处代码来源于博客【在.net中读写config文件的各种方法】的示例代码
-//// http://www.cnblogs.com/fish-li/archive/2011/12/18/2292037.html
-
-namespace Infrastructure.Common.Xml
+namespace Infrastructure.Common.Serialization
 {
     /// <summary>
     /// 用于XML序列化/反序列化的工具类
