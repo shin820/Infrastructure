@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AppDomain\AppDomainContext.cs" />
     <Compile Include="AppDomain\AssemblyResolver.cs" />
+    <Compile Include="Authentication\AuthCookieTicket.cs" />
     <Compile Include="Log\FileLogRecorder.cs" />
     <Compile Include="Log\ILogger.cs" />
     <Compile Include="Log\ILogRecorder.cs" />

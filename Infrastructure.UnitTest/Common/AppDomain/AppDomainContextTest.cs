@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Infrastructure.Common.AppDomain;
 using NUnit.Framework;
 
-namespace Infrastructure.UnitTest.AppDomain
+namespace Infrastructure.UnitTest.Common.AppDomain
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AppDomainContextTest
