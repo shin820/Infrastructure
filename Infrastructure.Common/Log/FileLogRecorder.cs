@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Common.Xml;
+using Infrastructure.Common.Serialization;
 
 namespace Infrastructure.Common.Log
 {
