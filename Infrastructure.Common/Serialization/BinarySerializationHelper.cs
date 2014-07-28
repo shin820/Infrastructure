@@ -25,12 +25,15 @@ namespace Infrastructure.Common.Serialization
                 throw new ArgumentNullException("obj");
             }
 
+            byte[] data;
             using (MemoryStream stream = new MemoryStream())
             {
                 new BinaryFormatter().Serialize(stream, obj);
                 stream.Position = 0;
-                return stream.ToArray();
+                data = stream.ToArray();
             }
+
+            return data;
         }
 
         /// <summary>
@@ -46,12 +49,15 @@ namespace Infrastructure.Common.Serialization
                 throw new ArgumentNullException("buffer");
             }
 
+            T obj;
             using (MemoryStream stream = new MemoryStream(buffer))
             {
                 stream.Position = 0;
                 BinaryFormatter formatter = new BinaryFormatter();
-                return (T)formatter.Deserialize(stream);
+                obj = (T)formatter.Deserialize(stream);
             }
+
+            return obj;
         }
     }
 }

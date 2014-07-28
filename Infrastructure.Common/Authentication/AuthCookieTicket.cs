@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Xml.Serialization;
+using Infrastructure.Common.Serialization;
 
 namespace Infrastructure.Common.Authentication
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented",
         Justification = "Reviewed. Suppression is OK here.")]
-    public class AuthCookieTicket
+    [Serializable]
+    public class AuthCookieTicket : DataCollection<string, object, StringComparer>
     {
         private const string AuthCookieName = "AuthCookieName";
         private const string AuthCookieTicketName = "AuthCookieTicketName";
@@ -26,16 +30,13 @@ namespace Infrastructure.Common.Authentication
         public string Token { get; set; }
         public string User { get; set; }
 
-        public AuthCookieTicket()
-        {
-            // 空参构造函数。序列化必须有这个构造函数. 
-        }
-
         public AuthCookieTicket(string user)
+            : base(StringComparer.OrdinalIgnoreCase)
         {
             // 创建随机Token
             this.Token = Guid.NewGuid().ToString();
             this.User = user;
+            this.Add("User", user);
             this.Signature = this.ComputeHash();
         }
 
@@ -114,19 +115,7 @@ namespace Infrastructure.Common.Authentication
 
         private string Serialize()
         {
-            string ticketString;
-            var serializer = new XmlSerializer(typeof(AuthCookieTicket));
-
-            using (var stream = new MemoryStream())
-            {
-                serializer.Serialize(stream, this);
-                stream.Seek(0L, SeekOrigin.Begin);
-                using (var reader = new StreamReader(stream))
-                {
-                    string s = reader.ReadToEnd();
-                    ticketString = Convert.ToBase64String(Encoding.Unicode.GetBytes(s));
-                }
-            }
+            string ticketString = Convert.ToBase64String(BinarySerializationHelper.Serialize(this));
 
             return ticketString;
         }
@@ -134,21 +123,17 @@ namespace Infrastructure.Common.Authentication
         private static AuthCookieTicket Deserialize(string ticketString)
         {
             AuthCookieTicket ticket = null;
-            var serializer = new XmlSerializer(typeof(AuthCookieTicket));
 
             try
             {
-                using (var reader = new StringReader(Encoding.Unicode.GetString(Convert.FromBase64String(ticketString))))
-                {
-                    ticket = (AuthCookieTicket)serializer.Deserialize(reader);
-                }
+                ticket = BinarySerializationHelper.Deserialize<AuthCookieTicket>(Convert.FromBase64String(ticketString));
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
                 // 传入的ticketString不是有效的base64字符串
                 ticket = null;
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
                 // Deserialize失败
                 ticket = null;

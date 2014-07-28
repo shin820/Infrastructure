@@ -35,16 +35,47 @@ namespace Infrastructure.UnitTest.Common.Authentication
         [Test]
         public void ShouldGetTicketFromCookie()
         {
-            var cookie = this.MakeTicketCookie("liux");
-            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
+            AuthCookieTicket ticket = new AuthCookieTicket("liux");
+
+            var cookie = this.MakeTicketCookie(ticket);
             Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
             HttpCookieCollection cookies = new HttpCookieCollection { cookie };
             request.SetupGet(t => t.Cookies).Returns(cookies);
+
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             context.SetupGet(t => t.Request).Returns(request.Object);
 
-            var ticket = AuthCookieTicket.GetTicketCookie(context.Object);
-            Assert.IsNotNull(ticket);
-            Assert.AreEqual("liux", ticket.User);
+            var ticketFromCookie = AuthCookieTicket.GetTicketCookie(context.Object);
+
+            Assert.IsNotNull(ticketFromCookie);
+            Assert.AreEqual(1, ticketFromCookie.Count);
+            Assert.AreEqual("liux", ticketFromCookie.User);
+        }
+
+        [Test]
+        public void ShouldGetTicketDataFromCookie()
+        {
+            AuthCookieTicket ticket = new AuthCookieTicket("liux");
+            ticket.Add("p1", 123);
+            Guid guid = Guid.NewGuid();
+            ticket.Add("p2", guid);
+
+            var cookie = this.MakeTicketCookie(ticket);
+
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
+            HttpCookieCollection cookies = new HttpCookieCollection { cookie };
+            request.SetupGet(t => t.Cookies).Returns(cookies);
+
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
+            context.SetupGet(t => t.Request).Returns(request.Object);
+
+            var ticketFromCookie = AuthCookieTicket.GetTicketCookie(context.Object);
+
+            Assert.IsNotNull(ticketFromCookie);
+            Assert.AreEqual(3, ticketFromCookie.Count);
+            Assert.AreEqual("liux", ticketFromCookie["User"]);
+            Assert.AreEqual(123, ticketFromCookie["p1"]);
+            Assert.AreEqual(guid, ticketFromCookie["p2"]);
         }
 
         [Test]
@@ -65,15 +96,13 @@ namespace Infrastructure.UnitTest.Common.Authentication
             Assert.AreEqual(1, cookies.Count);
         }
 
-        private HttpCookie MakeTicketCookie(string user)
+        private HttpCookie MakeTicketCookie(AuthCookieTicket ticket)
         {
             HttpCookie cookie = null;
             Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             Mock<HttpResponseBase> response = new Mock<HttpResponseBase>();
             context.SetupGet(t => t.Response).Returns(response.Object);
             response.Setup(t => t.SetCookie(It.IsAny<HttpCookie>())).Callback<HttpCookie>(t => cookie = t);
-
-            AuthCookieTicket ticket = new AuthCookieTicket(user);
             ticket.SetTicketCookie(context.Object);
 
             return cookie;
