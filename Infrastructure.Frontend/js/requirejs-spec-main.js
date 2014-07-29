@@ -11,7 +11,6 @@ require(['config'], function () {
             'jasmine-boot': 'lib/jasmine-2.0.1/boot',
             'blanket': 'lib/blanket-1.1.5.min',
             'jasmine-blanket': 'lib/jasmine-blanket-1.1.5'
-            //'utility': 'src/Utility'
         },
         shim: {
             'jasmine-boot': {
@@ -43,9 +42,9 @@ require(['config'], function () {
 
         jasmineEnv.updateInterval = 1000;
 
-        var specs = [];
-
-        specs.push('spec/UtilitySpec');
+        var specs = [
+            'spec/UtilitySpec'
+        ];
 
         $(document).ready(function () {
             require(specs, function (spec) {
