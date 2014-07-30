@@ -58,23 +58,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
-    <Content Include="Js\lib\jasmine-2.0.1\boot.js" />
-    <Content Include="Js\lib\jasmine-2.0.1\console.js" />
-    <Content Include="Js\lib\jasmine-2.0.1\jasmine-html.js" />
-    <Content Include="Js\lib\jasmine-2.0.1\jasmine.css" />
-    <Content Include="Js\lib\jasmine-2.0.1\jasmine.js" />
-    <Content Include="Js\lib\jasmine-2.0.1\jasmine_favicon.png" />
-    <Content Include="Js\lib\knockout-3.1.0-min.js" />
-    <Content Include="Js\lib\require-2.1.14.js" />
-    <Content Include="Js\requirejs-main.js" />
-    <Content Include="Js\requirejs-spec-main.js" />
-    <Content Include="Js\spec\PlayerSpec.js" />
-    <Content Include="Js\spec\SpecHelper.js" />
-    <Content Include="Js\spec\UtilitySpec.js" />
-    <Content Include="Js\src\Player.js" />
-    <Content Include="Js\src\Song.js" />
-    <Content Include="Js\src\Utility.js" />
-    <Content Include="Js\SpecRunner.html" />
+    <Content Include="js\config.js" />
+    <Content Include="js\lib\blanket-1.1.5.min.js" />
+    <Content Include="js\lib\jasmine-2.0.1\boot.js" />
+    <Content Include="js\lib\jasmine-2.0.1\console.js" />
+    <Content Include="js\lib\jasmine-2.0.1\jasmine-html.js" />
+    <Content Include="js\lib\jasmine-2.0.1\jasmine.css" />
+    <Content Include="js\lib\jasmine-2.0.1\jasmine.js" />
+    <Content Include="js\lib\jasmine-2.0.1\jasmine_favicon.png" />
+    <Content Include="js\lib\jasmine-blanket-1.1.5.js" />
+    <Content Include="js\lib\knockout-3.1.0-min.js" />
+    <Content Include="js\lib\require-2.1.14.js" />
+    <Content Include="js\lib\underscore-1.6.0.min.js" />
+    <Content Include="js\requirejs-main.js" />
+    <Content Include="js\requirejs-spec-main.js" />
+    <Content Include="js\spec\UtilitySpec.js" />
+    <Content Include="js\src\Utility.js" />
+    <Content Include="SpecRunner.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +88,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Js\lib\jquery-1.11.1.js" />
+    <Content Include="js\lib\jquery-1.11.1.js" />
+    <Content Include="js\lib\backbone-1.1.0.min.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -97,7 +98,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Css\" />
+    <Folder Include="css\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

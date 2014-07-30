@@ -1,13 +1,11 @@
 ﻿
 define(function () {
 
-    ///	<summary>
-    ///     过滤字符串前后空格
-    ///	</summary>
-    ///	<param name="str" type="String">
-    ///		表示要被过滤空格的字符串
-    ///	</param>
-    ///	<returns type="String" />
+    /**
+     * 过滤字符串前后空格.
+     * @param {string} 表示要被过滤空格的字符串
+     * @return {string} 过滤空格后的字符串
+     */
     function trim(str) {
         if (!str) {
             return "";
@@ -27,17 +25,13 @@ define(function () {
         return result;
     }
 
-    ///	<summary>
-    ///     将日期对象格式化为指定格式的字符串形式.
-    ///	</summary>
-    ///	<param name="dtm" type="Date">
-    ///		日期对象
-    ///	</param>
-    ///	<param name="fmt" type="String">
-    ///		格式,值包括:yyyy表示4位年,MM表示2位月份,dd表示2位天,HH表示小时(24小时制),mm表示分钟,ss表示秒,S表示毫秒
-    ///     例如: yyyy-MM-dd 会被格式化成 2014-02-18
-    ///	</param>
-    ///	<returns type="String" />
+    /**
+     * 将日期对象格式化为指定格式的字符串形式.
+     * @param {date} 日期对象
+     * @param {string} 格式,值包括:yyyy表示4位年,MM表示2位月份,dd表示2位天,HH表示小时(24小时制),mm表示分钟,ss表示秒,S表示毫秒
+     *                 例如: yyyy-MM-dd 会被格式化成 2014-02-18
+     * @return {string}
+     */
     function formateDate(dtm, fmt) {
         if (!dtm) {
             return null;
@@ -58,17 +52,13 @@ define(function () {
         return fmt;
     }
 
-    ///	<summary>
-    ///     将字符串按照指定格式,格式化为日期对象.
-    ///	</summary>
-    ///	<param name="str" type="String">
-    ///		日期对象
-    ///	</param>
-    ///	<param name="fmt" type="String">
-    ///		格式,值包括:yyyy表示4位年,MM表示2位月份,dd表示2位天,HH表示小时(24小时制),mm表示分钟,ss表示秒,S表示毫秒
-    ///     例如: 2014-02-18 字符串可以使用 yyyy-MM-dd 格式进行格式化
-    ///	</param>
-    ///	<returns type="Date" />
+    /**
+     * 将字符串按照指定格式,格式化为日期对象.
+     * @param {string} 日期字符串
+     * @param {string} 格式,值包括:yyyy表示4位年,MM表示2位月份,dd表示2位天,HH表示小时(24小时制),mm表示分钟,ss表示秒,S表示毫秒
+     *                 例如: 2014-02-18 字符串可以使用 yyyy-MM-dd 格式进行格式化
+     * @return {date} 日期对象
+     */
     function parseDate(str, fmt) {
         if (!str) {
             return null;
@@ -130,19 +120,13 @@ define(function () {
         return new Date(year, month, date, hours, minutes, seconds, ms);
     }
 
-    ///	<summary>
-    ///     日期加减计算
-    ///	</summary>
-    ///	<param name="dtm" type="Date">
-    ///		日期对象
-    ///	</param>
-    ///	<param name="type" type="String">
-    ///		类型,值包括 "day" 表示增加几天, "hour" 表示增加几小时, "minute" 表示增加几分钟, "second" 表示增加几秒
-    ///	</param>
-    ///	<param name="num" type="Number">
-    ///		加减的数值,正数表示增加相应时间,负数表示减去相应的时间
-    ///	</param>
-    ///	<returns type="Date" />
+    /**
+     * 日期加减计算.
+     * @param {date} 日期对象
+     * @param {string} 类型,值包括 "day" 表示增加几天, "hour" 表示增加几小时, "minute" 表示增加几分钟, "second" 表示增加几秒
+     * @param {number} 加减的数值,正数表示增加相应时间,负数表示减去相应的时间
+     * @return {date} 日期对象
+     */
     function addDate(dtm, type, num) {
         var time = dtm.getTime();
         switch (type) {
@@ -162,7 +146,11 @@ define(function () {
         return new Date(time);
     }
 
-    //判断是否为guid
+    /**
+     * 判断是否为guid
+     * @param {string} 
+     * @return {boolean} 是否guid
+     */
     function isGuid(str) {
         var r = new RegExp("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}(,[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12})*$");
         return r.test(str.toString());
