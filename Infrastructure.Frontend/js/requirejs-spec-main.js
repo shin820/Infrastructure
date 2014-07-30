@@ -42,6 +42,21 @@ require(['config'], function () {
 
         jasmineEnv.updateInterval = 1000;
 
+        // add custom jasmine matchers
+        beforeEach(function () {
+            jasmine.addMatchers({
+                toBeDate: function () {
+                    return {
+                        compare: function (actual, expected) {
+                            return {
+                                pass: actual.toString() === expected.toString()
+                            };
+                        }
+                    };
+                }
+            });
+        });
+
         var specs = [
             'spec/UtilitySpec'
         ];
