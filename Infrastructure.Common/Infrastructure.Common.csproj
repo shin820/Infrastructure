@@ -46,6 +46,7 @@
     <Compile Include="Authentication\AuthCookieTicket.cs" />
     <Compile Include="Authentication\MyIdentity.cs" />
     <Compile Include="DataCollection.cs" />
+    <Compile Include="Extension\TypeExtension.cs" />
     <Compile Include="Log\FileLogRecorder.cs" />
     <Compile Include="Log\ILogger.cs" />
     <Compile Include="Log\ILogRecorder.cs" />
